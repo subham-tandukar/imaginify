@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 const { clerkClient } = require("@clerk/nextjs");
 const { Webhook } = require("svix");
-const { WebhookEvent } = require("@clerk/nextjs/server");
 const { headers } = require("next/headers");
 const { NextResponse } = require("next/server");
 
@@ -9,7 +8,7 @@ const {
   createUser,
   deleteUser,
   updateUser,
-} = require("@/lib/actions/users.actions");
+} = require("@/lib/actions/user.actions");
 
 export async function POST(req) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -40,7 +39,7 @@ export async function POST(req) {
   // Create a new Svix instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
 
-  let evt = WebhookEvent;
+  let evt;
 
   // Verify the payload with the headers
   try {
