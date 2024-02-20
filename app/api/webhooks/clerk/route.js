@@ -63,6 +63,7 @@ export async function POST(req) {
 
   // CREATE
   if (eventType === "user.created") {
+    localStorage.setItem("eventType", eventType);
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
 
