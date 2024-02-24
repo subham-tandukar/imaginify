@@ -64,13 +64,22 @@ export async function POST(req) {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
 
+    // const user = {
+    //   clerkId: id,
+    //   email: email_addresses[0].email_address,
+    //   username: username || "",
+    //   firstName: first_name,
+    //   lastName: last_name,
+    //   photo: image_url,
+    // };
     const user = {
-      clerkId: id,
-      email: email_addresses[0].email_address,
-      username: username || "",
-      firstName: first_name,
-      lastName: last_name,
-      photo: image_url,
+      clerkId: "2",
+      email: "subham@gmail.com",
+      username: "subham",
+      firstName: "test",
+      lastName: "haii",
+      photo:
+        "https://res.cloudinary.com/de3eu0mvq/image/upload/v1706102866/profile/wb1vsanfsasapxcozwni.png",
     };
 
     const newUser = await createUser(user);
