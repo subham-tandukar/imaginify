@@ -11,7 +11,7 @@ const {
 } = require("@/lib/actions/user.actions");
 
 export async function POST(req) {
-  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRE;
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
