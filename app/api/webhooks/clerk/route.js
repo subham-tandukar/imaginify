@@ -20,7 +20,7 @@ export async function POST(req) {
   }
 
   // Get the headers
-  const headerPayload = headers(req);
+  const headerPayload = headers();
   const svix_id = headerPayload.get("svix-id");
   const svix_timestamp = headerPayload.get("svix-timestamp");
   const svix_signature = headerPayload.get("svix-signature");
@@ -33,7 +33,7 @@ export async function POST(req) {
   }
 
   // Get the body
-  const payload = await req.body;
+  const payload = await req.json();
   const body = JSON.stringify(payload);
 
   // Create a new Svix instance with your secret.
