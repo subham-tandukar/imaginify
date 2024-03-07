@@ -4,11 +4,14 @@ const { Webhook } = require("svix");
 const { headers } = require("next/headers");
 const { NextResponse } = require("next/server");
 
-const { createUser, deleteUser, updateUser } = require("@/lib/actions/user.action");
+const {
+  createUser,
+  deleteUser,
+  updateUser,
+} = require("@/lib/actions/user.action");
 
 export async function POST(req) {
-  // const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
-  const WEBHOOK_SECRET = "whsec_P0Pr9P5YiDqW1SM6beZ73ykQJQHGKpef";
+  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
