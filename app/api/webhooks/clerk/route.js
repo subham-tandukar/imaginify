@@ -4,14 +4,11 @@ const { Webhook } = require("svix");
 const { headers } = require("next/headers");
 const { NextResponse } = require("next/server");
 
-const {
-  createUser,
-  deleteUser,
-  updateUser,
-} = require("@/lib/actions/user.actions");
+const { createUser, deleteUser, updateUser } = require("@/lib/actions/user");
 
 export async function POST(req) {
-  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+  // const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+  const WEBHOOK_SECRET = "whsec_P0Pr9P5YiDqW1SM6beZ73ykQJQHGKpef";
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
@@ -27,6 +24,7 @@ export async function POST(req) {
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
+    console.log("headerPayload", headerPayload);
     return new Response("Error occured -- no svix headers", {
       status: 400,
     });
@@ -63,25 +61,14 @@ export async function POST(req) {
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
-
-    // const user = {
-    //   clerkId: id,
-    //   email: email_addresses[0].email_address,
-    //   username: username || "",
-    //   firstName: first_name,
-    //   lastName: last_name,
-    //   photo: image_url,
-    // };
     const user = {
-      clerkId: "2",
-      email: "subham@gmail.com",
-      username: "subham",
-      firstName: "test",
-      lastName: "haii",
-      photo:
-        "https://res.cloudinary.com/de3eu0mvq/image/upload/v1706102866/profile/wb1vsanfsasapxcozwni.png",
+      clerkId: id,
+      email: email_addresses[0].email_address,
+      username: username || "",
+      firstName: first_name,
+      lastName: last_name,
+      photo: image_url,
     };
-
     const newUser = await createUser(user);
 
     // Set public metadata
